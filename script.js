@@ -1,13 +1,17 @@
-document.getElementById('newsletterForm').addEventListener('submit', function (event) {
-  event.preventDefault();
+// ===== MENU HAMBURGUER =====
+document.getElementById('menuToggle').addEventListener('click', function () {
+  document.getElementById('navLinks').classList.toggle('open');
+});
 
-  const nome = document.getElementById('nome').value;
-  const email = document.getElementById('email').value;
 
-  const assunto = encodeURIComponent('Novo contato pela landing page');
-  const corpo = encodeURIComponent(`Nome: ${nome}\nE-mail: ${email}`);
+// ===== CARROSSEL DO MOSAICO =====
+document.getElementById('mosaicNext').addEventListener('click', function() {
+  document.getElementById('mosaicTrack').scrollBy({ left: 280, behavior: 'smooth'});
+});
 
-  window.location.href = `mailto:tacianepaloschi@gmail.com?subject=${assunto}&body=${corpo}`;
+
+document.getElementById('mosaicPrev').addEventListener('click', function() {
+  document.getElementById('mosaicTrack').scrollBy({ left: -280, behavior: 'smooth'});
 });
 
 
@@ -67,3 +71,26 @@ function girarMosaico() {
 
 aplicarPosicoes();
 setInterval(girarMosaico, 3000);
+
+
+
+
+// ===== BANNER DE COOKIES =====
+const cookieBanner = document.getElementById('cookieBanner');
+const consentimento = localStorage.getItem('cookieConsent');
+
+if (!consentimento) {
+  cookieBanner.classList.add('visible');
+}
+
+
+document.getElementById('cookieAccept').addEventListener('click', function () {
+  localStorage.setItem('cookieConsent', 'accepted');
+  cookieBanner.classList.remove('visible');
+});
+
+
+document.getElementById('cookieReject').addEventListener('click', function () {
+  localStorage.setItem('cookieConsent', 'rejected');
+  cookieBanner.classList.remove('visible');
+});
